@@ -342,16 +342,92 @@ def build_params():
             }
         ])
 
-    return params
+    sections = [
+        {
+            "label": "Main & Presets",
+            "keys": ["preset", "preset_prev", "preset_next", "patch_name", "folder_name", "author", "volume", "polyphony", "legato", "portamento", "portamento_type", "pitch_bend_range", "velocity_track"]
+        },
+        {
+            "label": "Oscillator 1",
+            "keys": ["osc_1_waveform", "osc_1_transpose", "osc_1_tune", "osc_1_volume", "osc_1_unison_voices", "osc_1_unison_detune", "unison_1_harmonize", "cross_modulation"]
+        },
+        {
+            "label": "Oscillator 2",
+            "keys": ["osc_2_waveform", "osc_2_transpose", "osc_2_tune", "osc_2_volume", "osc_2_unison_voices", "osc_2_unison_detune", "unison_2_harmonize", "osc_feedback_amount", "osc_feedback_transpose", "osc_feedback_tune"]
+        },
+        {
+            "label": "Sub & Noise",
+            "keys": ["sub_waveform", "sub_octave", "sub_shuffle", "sub_volume", "noise_volume"]
+        },
+        {
+            "label": "Filter",
+            "keys": ["filter_on", "filter_style", "filter_shelf", "cutoff", "resonance", "filter_drive", "filter_blend", "fil_env_depth", "keytrack", "formant_on", "formant_x", "formant_y"]
+        },
+        {
+            "label": "Amp Envelope",
+            "keys": ["amp_attack", "amp_decay", "amp_sustain", "amp_release"]
+        },
+        {
+            "label": "Filter Envelope",
+            "keys": ["fil_attack", "fil_decay", "fil_sustain", "fil_release"]
+        },
+        {
+            "label": "Mod Envelope",
+            "keys": ["mod_attack", "mod_decay", "mod_sustain", "mod_release"]
+        },
+        {
+            "label": "Mono LFO 1",
+            "keys": ["mono_lfo_1_waveform", "mono_lfo_1_amplitude", "mono_lfo_1_frequency", "mono_lfo_1_sync", "mono_lfo_1_tempo", "mono_lfo_1_retrigger"]
+        },
+        {
+            "label": "Mono LFO 2",
+            "keys": ["mono_lfo_2_waveform", "mono_lfo_2_amplitude", "mono_lfo_2_frequency", "mono_lfo_2_sync", "mono_lfo_2_tempo", "mono_lfo_2_retrigger"]
+        },
+        {
+            "label": "Poly LFO",
+            "keys": ["poly_lfo_waveform", "poly_lfo_amplitude", "poly_lfo_frequency", "poly_lfo_sync", "poly_lfo_tempo"]
+        },
+        {
+            "label": "Arpeggiator",
+            "keys": ["arp_on", "arp_pattern", "arp_octaves", "arp_gate", "arp_frequency", "arp_sync", "arp_tempo"]
+        },
+        {
+            "label": "Step Sequencer",
+            "keys": ["num_steps", "step_smoothing", "step_frequency", "step_sequencer_sync", "step_sequencer_tempo", "step_sequencer_retrigger"]
+        },
+        {
+            "label": "Distortion",
+            "keys": ["distortion_on", "distortion_type", "distortion_drive", "distortion_mix"]
+        },
+        {
+            "label": "Stutter",
+            "keys": ["stutter_on", "stutter_frequency", "stutter_sync", "stutter_tempo", "stutter_softness", "stutter_resample_frequency", "stutter_resample_sync", "stutter_resample_tempo"]
+        },
+        {
+            "label": "Delay & Reverb",
+            "keys": ["delay_on", "delay_frequency", "delay_sync", "delay_tempo", "delay_feedback", "delay_dry_wet", "reverb_on", "reverb_feedback", "reverb_damping", "reverb_dry_wet"]
+        },
+        {
+            "label": "Mod Matrix 1-4",
+            "keys": ["mod_1_source", "mod_1_dest", "mod_1_amount", "mod_2_source", "mod_2_dest", "mod_2_amount", "mod_3_source", "mod_3_dest", "mod_3_amount", "mod_4_source", "mod_4_dest", "mod_4_amount"]
+        },
+        {
+            "label": "Mod Matrix 5-8",
+            "keys": ["mod_5_source", "mod_5_dest", "mod_5_amount", "mod_6_source", "mod_6_dest", "mod_6_amount", "mod_7_source", "mod_7_dest", "mod_7_amount", "mod_8_source", "mod_8_dest", "mod_8_amount"]
+        }
+    ]
+
+    return params, sections
 
 
 if __name__ == "__main__":
-    params = build_params()
+    params, sections = build_params()
     data = {
         "name": "Helm",
-        "params": params
+        "params": params,
+        "sections": sections
     }
     out_path = os.path.join(os.path.dirname(__file__), "..", "params.json")
     with open(out_path, "w") as f:
         json.dump(data, f, indent=2)
-    print(f"Wrote {len(params)} parameters to {out_path}")
+    print(f"Wrote {len(params)} parameters across {len(sections)} sections to {out_path}")

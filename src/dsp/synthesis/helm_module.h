@@ -29,7 +29,7 @@ namespace mopo {
   class HelmModule : public virtual ProcessorRouter {
     public:
       HelmModule();
-      virtual ~HelmModule() { } // Should probably delete things.
+      virtual ~HelmModule() { }
 
       // For initializing things that require parents that aren't set in constructor.
       virtual void init();

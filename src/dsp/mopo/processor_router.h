@@ -89,6 +89,7 @@ namespace mopo {
 
       int* global_changes_;
       int local_changes_;
+      bool owns_global_;
   };
 } // namespace mopo
 

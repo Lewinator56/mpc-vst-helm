@@ -5,6 +5,7 @@
   "version": 1000,
   "so": "helm.so",
   "params": "params.json",
+  "layout": "layout.conf",
   "build": {
     "root": ".",
     "sources": [

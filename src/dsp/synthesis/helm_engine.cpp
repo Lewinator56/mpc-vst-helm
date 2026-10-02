@@ -38,6 +38,7 @@ namespace mopo {
   HelmEngine::~HelmEngine() {
     while (mod_connections_.size())
       disconnectModulation(*mod_connections_.begin());
+    destroy();
   }
 
   void HelmEngine::init() {

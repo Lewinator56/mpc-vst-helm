@@ -212,8 +212,9 @@ struct HelmInstance {
         while ((ent = readdir(dir)) != nullptr) {
             if (ent->d_name[0] == '.') continue;
             std::string subpath = base_dir + "/" + ent->d_name;
-            struct stat st;
-            if (stat(subpath.c_str(), &st) == 0 && S_ISDIR(st.st_mode)) {
+            DIR* sdir_test = opendir(subpath.c_str());
+            if (sdir_test) {
+                closedir(sdir_test);
                 subdirs.push_back(subpath);
             }
         }
@@ -382,8 +383,9 @@ static void *helm_create(const char *data_dir) {
     search_paths.push_back("patches/Factory Presets");
 
     for (const auto& path : search_paths) {
-        struct stat st;
-        if (stat(path.c_str(), &st) == 0 && S_ISDIR(st.st_mode)) {
+        DIR* test_d = opendir(path.c_str());
+        if (test_d) {
+            closedir(test_d);
             inst->scan_patches_dir(path);
             if (!inst->patches.empty()) {
                 inst->load_preset(0);

@@ -49,9 +49,6 @@ namespace mopo {
 }
 
   VoiceHandler::~VoiceHandler() {
-    voice_router_.destroy();
-    global_router_.destroy();
-
     for (Voice* voice : all_voices_)
       delete voice;
 

@@ -27,14 +27,16 @@ namespace mopo {
       Processor(num_inputs, num_outputs),
       global_order_(new std::vector<const Processor*>()),
       global_feedback_order_(new std::vector<const Feedback*>()),
-      global_changes_(new int(0)), local_changes_(0) {
+      global_changes_(new int(0)), local_changes_(0),
+      owns_global_(true) {
   }
 
   ProcessorRouter::ProcessorRouter(const ProcessorRouter& original) :
       Processor(original), global_order_(original.global_order_),
       global_feedback_order_(original.global_feedback_order_),
       global_changes_(original.global_changes_),
-      local_changes_(original.local_changes_) {
+      local_changes_(original.local_changes_),
+      owns_global_(false) {
     local_order_.assign(global_order_->size(), 0);
     local_feedback_order_.assign(global_feedback_order_->size(), 0);
 
@@ -58,12 +60,25 @@ namespace mopo {
   ProcessorRouter::~ProcessorRouter() {
     for (Processor* processor : local_order_)
       delete processor;
+    local_order_.clear();
+
     for (Feedback* feedback : local_feedback_order_)
       delete feedback;
+    local_feedback_order_.clear();
 
     for (Processor* processor : idle_processors_) {
-      processor->destroy();
       delete processor;
+    }
+    idle_processors_.clear();
+
+    if (owns_global_) {
+      delete global_order_;
+      global_order_ = nullptr;
+      delete global_feedback_order_;
+      global_feedback_order_ = nullptr;
+      delete global_changes_;
+      global_changes_ = nullptr;
+      owns_global_ = false;
     }
   }
 
@@ -92,12 +107,9 @@ namespace mopo {
   }
 
   void ProcessorRouter::destroy() {
-    for (Processor* processor : local_order_)
-      processor->destroy();
-
-    delete global_order_;
-    delete global_feedback_order_;
-    delete global_changes_;
+    for (Processor* processor : local_order_) {
+      if (processor) processor->destroy();
+    }
     Processor::destroy();
   }
 
