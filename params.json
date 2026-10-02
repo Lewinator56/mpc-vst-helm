@@ -364,8 +364,8 @@
       "key": "filter_style",
       "name": "Filter Style",
       "options": [
-        "12dB",
-        "24dB",
+        "12 dB",
+        "24 dB",
         "Shelf"
       ],
       "default": 0
@@ -584,8 +584,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -659,8 +659,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -734,8 +734,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -787,8 +787,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -873,8 +873,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -955,8 +955,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -1050,8 +1050,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },
@@ -1096,8 +1096,8 @@
       "options": [
         "Seconds",
         "Tempo",
-        "Tempo Dot",
-        "Tempo Trip"
+        "Dotted",
+        "Triplet"
       ],
       "default": 1
     },

@@ -92,10 +92,10 @@ SYNCED_FREQS = [
     "1/2", "1/4", "1/8", "1/16", "1/32", "1/64"
 ]
 
-FREQ_SYNC_STYLES = ["Seconds", "Tempo", "Tempo Dot", "Tempo Trip"]
+FREQ_SYNC_STYLES = ["Seconds", "Tempo", "Dotted", "Triplet"]
 RETRIGGER_STYLES = ["Free", "Retrigger", "Playhead"]
 OFF_ON = ["Off", "On"]
-FILTER_STYLES = ["12dB", "24dB", "Shelf"]
+FILTER_STYLES = ["12 dB", "24 dB", "Shelf"]
 FILTER_SHELVES = ["Low Shelf", "Band Shelf", "High Shelf"]
 ARP_PATTERNS = ["Up", "Down", "Up-Down", "As Played", "Random"]
 DISTORTION_TYPES = ["Soft Clip", "Hard Clip", "Linear Fold", "Sine Fold"]
