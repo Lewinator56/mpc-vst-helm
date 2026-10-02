@@ -9,13 +9,13 @@
 :root {
   --font: "Open Sans", "Titillium Web", "DejaVu Sans", sans-serif;
   --title-font: "Open Sans", "Titillium Web", sans-serif;
-  --title-size: 18px;
-  --label-size: 14px;
-  --seg-size: 13px;
+  --title-size: 14px;
+  --label-size: 12px;
+  --seg-size: 12px;
   --button-size: 14px;
   --radius: 6px;
-  --sheen: 0.12;
-  --shadow: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.75));
+  --sheen: 0.15;
+  --shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
 }
 
 text {
@@ -25,10 +25,10 @@ text {
 
 /* Frames & Panels */
 .frame-border {
-  fill: rgba(14, 18, 22, 0.65);
+  fill: rgba(18, 24, 30, 0.7);
   stroke: var(--line);
   stroke-width: 1.5;
-  rx: 8px;
+  rx: 6px;
 }
 .frame-title {
   font-family: var(--title-font);
@@ -37,17 +37,26 @@ text {
   fill: var(--accent-hi);
   letter-spacing: 0.08em;
 }
+.td3 .frame-border {
+  fill: var(--box);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+.td3 .frame-title {
+  fill: var(--accent);
+}
 
 /* Free text and labels */
 .text {
   font-size: var(--label-size);
   letter-spacing: 0.05em;
+  fill: var(--ink);
 }
 
 /* Knobs */
 .knob-track {
   fill: none;
-  stroke: #1c2228;
+  stroke: #182026;
   stroke-width: 3.5;
   stroke-linecap: round;
 }
@@ -58,8 +67,8 @@ text {
   stroke-linecap: round;
 }
 .knob-face {
-  fill: #14181c;
-  stroke: #252e36;
+  fill: #14191e;
+  stroke: #222b33;
   stroke-width: 1.5;
   filter: var(--shadow);
 }
@@ -69,9 +78,9 @@ text {
   stroke-linecap: round;
 }
 
-/* Modern Sliders & Draggable Bars */
+/* Sliders */
 .slider-well {
-  fill: #0c0f12;
+  fill: #080b0e;
   stroke: #222b33;
   stroke-width: 1.5;
   rx: 4px;
@@ -80,7 +89,7 @@ text {
   fill: #38c5c5;
 }
 .slider-thumb {
-  fill: #1a2026;
+  fill: #161c22;
   stroke: #50e4e4;
   stroke-width: 2.5;
   filter: var(--shadow);
@@ -88,16 +97,16 @@ text {
 
 /* Fader Look (.look-fader) */
 .look-slot {
-  fill: #0a0d10;
-  stroke: #222b33;
+  fill: #06090c;
+  stroke: #202932;
   stroke-width: 1.5;
 }
 .look-tick {
-  stroke: #2a3540;
+  stroke: #28333e;
   stroke-width: 1;
 }
 .look-fader {
-  fill: #222a31;
+  fill: #1a222a;
   stroke: #38c5c5;
   stroke-width: 1.5;
   filter: var(--shadow);
@@ -108,40 +117,52 @@ text {
   stroke-width: 1.5;
 }
 
-/* Toggles / Pills */
+/* Toggles / Pills (JV-880 style pill with cyan glow) */
 .pill-track {
-  fill: #0c0f12;
-  stroke: #252e36;
+  fill: #06090c;
+  stroke: #222b33;
   stroke-width: 1.5;
 }
 .pill-thumb {
   fill: #3a4550;
+  stroke: #161c22;
+  stroke-width: 1;
   filter: var(--shadow);
 }
 .on .pill-thumb {
   fill: #38c5c5;
-  filter: drop-shadow(0 0 4px #38c5c5);
+  stroke: #50e4e4;
+  stroke-width: 1;
+  filter: drop-shadow(0 0 5px #38c5c5);
 }
 
 /* Buttons */
 .button-bg {
-  fill: #1a2026;
-  stroke: #2a343e;
+  fill: #161c22;
+  stroke: #3a4550;
   stroke-width: 1.5;
   filter: var(--shadow);
   rx: var(--radius);
 }
+.button-sheen {
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1;
+  rx: var(--radius);
+}
 .button-tx {
   font-size: var(--button-size);
-  fill: #e8f1f5;
+  fill: #f0f4f8;
   letter-spacing: 0.08em;
   font-weight: 700;
+}
+.td3 .button-tx {
+  fill: #ffffff;
 }
 
 /* Text boxes, Readouts, Steppers, Popups */
 .box {
-  fill: #0e1216;
-  stroke: #252e36;
+  fill: #0a0d10;
+  stroke: #222b33;
   stroke-width: 1.5;
   rx: 5px;
 }
@@ -155,7 +176,7 @@ text {
   fill: #38c5c5;
 }
 .arrow-bg {
-  fill: #1c232a;
+  fill: #161c22;
 }
 
 /* Option Segments */
@@ -186,7 +207,7 @@ text {
 
 /* List Tiles (Preset / Bank Browser) */
 .tile {
-  fill: #101418;
+  fill: #0e1216;
   stroke: #222b33;
   stroke-width: 1.5;
   rx: 4px;

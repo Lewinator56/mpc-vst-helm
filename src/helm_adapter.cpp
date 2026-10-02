@@ -291,54 +291,91 @@ struct HelmInstance {
         load_preset(0);
     }
 
-    void scan_patches_dir(const std::string& base_dir) {
-        patches.clear();
-        DIR* dir = opendir(base_dir.c_str());
-        if (!dir) return;
-
+    void scan_recursive(const std::string& current_path) {
+        DIR* d = opendir(current_path.c_str());
+        if (!d) return;
         struct dirent* ent;
         std::vector<std::string> subdirs;
-        while ((ent = readdir(dir)) != nullptr) {
+        std::vector<std::string> files;
+        while ((ent = readdir(d)) != nullptr) {
             if (ent->d_name[0] == '.') continue;
-            std::string subpath = base_dir + "/" + ent->d_name;
-            DIR* sdir_test = opendir(subpath.c_str());
-            if (sdir_test) {
-                closedir(sdir_test);
-                subdirs.push_back(subpath);
+            std::string full = current_path + "/" + ent->d_name;
+            DIR* test_sub = opendir(full.c_str());
+            if (test_sub) {
+                closedir(test_sub);
+                subdirs.push_back(full);
+            } else {
+                files.push_back(full);
             }
         }
-        closedir(dir);
+        closedir(d);
 
-        std::sort(subdirs.begin(), subdirs.end());
-        for (const auto& sdir : subdirs) {
-            DIR* s = opendir(sdir.c_str());
-            if (!s) continue;
-            std::vector<std::string> patch_files;
-            while ((ent = readdir(s)) != nullptr) {
-                std::string fname = ent->d_name;
-                if (fname.size() > 5 && fname.substr(fname.size() - 5) == ".helm") {
-                    patch_files.push_back(sdir + "/" + fname);
-                }
-            }
-            closedir(s);
-            std::sort(patch_files.begin(), patch_files.end());
-            for (const auto& ppath : patch_files) {
+        std::sort(files.begin(), files.end());
+        for (const auto& f : files) {
+            if (f.size() > 5 && f.substr(f.size() - 5) == ".helm") {
                 PatchEntry pe;
-                pe.path = ppath;
-                size_t slash1 = ppath.find_last_of('/');
-                size_t slash2 = ppath.find_last_of('/', slash1 > 0 ? slash1 - 1 : 0);
+                pe.path = f;
+                size_t slash1 = f.find_last_of('/');
+                size_t slash2 = (slash1 != std::string::npos && slash1 > 0) ? f.find_last_of('/', slash1 - 1) : std::string::npos;
                 if (slash2 != std::string::npos && slash1 != std::string::npos) {
-                    pe.folder = ppath.substr(slash2 + 1, slash1 - slash2 - 1);
+                    pe.folder = f.substr(slash2 + 1, slash1 - slash2 - 1);
                 } else {
                     pe.folder = "Factory";
                 }
-                std::string base = (slash1 != std::string::npos) ? ppath.substr(slash1 + 1) : ppath;
+                std::string base = (slash1 != std::string::npos) ? f.substr(slash1 + 1) : f;
                 pe.name = base.substr(0, base.size() - 5);
                 pe.author = "Matt Tytel";
-                patches.push_back(pe);
+
+                bool duplicate = false;
+                for (const auto& existing : patches) {
+                    if (existing.folder == pe.folder && existing.name == pe.name) {
+                        duplicate = true;
+                        break;
+                    }
+                }
+                if (!duplicate) {
+                    patches.push_back(pe);
+                }
             }
         }
+
+        std::sort(subdirs.begin(), subdirs.end());
+        for (const auto& sd : subdirs) {
+            scan_recursive(sd);
+        }
+    }
+
+    void scan_patches_dir(const std::string& base_dir) {
+        patches.clear();
+        scan_recursive(base_dir);
         update_categories();
+    }
+
+    void load_patch_by_global_index(int patch_idx) {
+        if (patch_idx < 0 || patch_idx >= (int)patches.size()) return;
+        const PatchEntry& pe = patches[patch_idx];
+        std::ifstream ifs(pe.path);
+        if (!ifs.is_open()) return;
+
+        std::stringstream ss;
+        ss << ifs.rdbuf();
+        load_patch_json(ss.str());
+        current_patch_name = pe.name;
+        current_folder_name = pe.folder;
+
+        for (size_t c = 0; c < categories.size(); ++c) {
+            if (categories[c] == pe.folder) {
+                current_category = (int)c;
+                break;
+            }
+        }
+        update_filtered_indices();
+        for (size_t fi = 0; fi < filtered_indices.size(); ++fi) {
+            if (filtered_indices[fi] == patch_idx) {
+                current_preset = (int)fi;
+                break;
+            }
+        }
     }
 
     void load_preset(int index) {
@@ -474,12 +511,14 @@ static void *helm_create(const char *data_dir) {
     // Look for factory patches in data_dir / relative paths
     std::vector<std::string> search_paths;
     if (data_dir && data_dir[0]) {
+        search_paths.push_back(std::string(data_dir) + "/patches");
         search_paths.push_back(std::string(data_dir) + "/patches/Factory Presets");
-        search_paths.push_back(std::string(data_dir) + "/Factory Presets");
+        search_paths.push_back(std::string(data_dir));
     }
+    search_paths.push_back("./patches");
     search_paths.push_back("./patches/Factory Presets");
-    search_paths.push_back("../patches/Factory Presets");
-    search_paths.push_back("patches/Factory Presets");
+    search_paths.push_back("../patches");
+    search_paths.push_back("patches");
 
     for (const auto& path : search_paths) {
         DIR* test_d = opendir(path.c_str());
@@ -633,13 +672,7 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
         int slot = atoi(key + 11) - 1;
         int idx = inst->get_patch_index_at_slot(slot);
         if (idx >= 0 && idx < (int)inst->patches.size()) {
-            inst->set_category(inst->browse_bank);
-            for (size_t fi = 0; fi < inst->filtered_indices.size(); ++fi) {
-                if (inst->filtered_indices[fi] == idx) {
-                    inst->load_preset((int)fi);
-                    break;
-                }
-            }
+            inst->load_patch_by_global_index(idx);
         }
         return;
     }
