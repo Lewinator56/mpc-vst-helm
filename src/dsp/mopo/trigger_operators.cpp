@@ -33,7 +33,7 @@ namespace mopo {
     }
   }
 
-  TriggerWait::TriggerWait() : Processor(kNumInputs, 1) { }
+  TriggerWait::TriggerWait() : Processor(kNumInputs, 1), waiting_(false), trigger_value_(0.0) { }
 
   void TriggerWait::waitTrigger(mopo_float trigger_value) {
     waiting_ = true;

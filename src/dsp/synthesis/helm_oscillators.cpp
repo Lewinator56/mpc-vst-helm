@@ -82,13 +82,13 @@ namespace mopo {
 
     VECTORIZE_LOOP
     for (int i = 0; i < samples; ++i) {
-      dest1[i] = UINT_MAX * src1[i];
-      dest2[i] = UINT_MAX * src2[i];
+      dest1[i] = (int)((unsigned int)(UINT_MAX * src1[i]));
+      dest2[i] = (int)((unsigned int)(UINT_MAX * src2[i]));
     }
 
     for (int i = 1; i < samples; ++i) {
-      dest1[i] += dest1[i - 1];
-      dest2[i] += dest2[i - 1];
+      dest1[i] = (int)((unsigned int)dest1[i] + (unsigned int)dest1[i - 1]);
+      dest2[i] = (int)((unsigned int)dest2[i] + (unsigned int)dest2[i - 1]);
     }
   }
 
