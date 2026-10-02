@@ -156,6 +156,48 @@ struct HelmInstance {
     std::string current_folder_name = "All";
     std::string current_author = "Matt Tytel";
 
+    int browse_bank = 0;
+    int browse_page = 0;
+
+    static const int BANK_LIST_SLOTS = 14;
+    static const int PATCH_LIST_SLOTS = 28;
+
+    int browse_category_patch_count() const {
+        if (browse_bank == 0) return (int)patches.size();
+        if (browse_bank < 1 || browse_bank >= (int)categories.size()) return 0;
+        const std::string& cat = categories[browse_bank];
+        int count = 0;
+        for (const auto& p : patches) {
+            if (p.folder == cat) count++;
+        }
+        return count;
+    }
+
+    int browse_page_count() const {
+        int cnt = browse_category_patch_count();
+        if (cnt <= 0) return 1;
+        return (cnt + PATCH_LIST_SLOTS - 1) / PATCH_LIST_SLOTS;
+    }
+
+    int get_patch_index_at_slot(int slot) const {
+        if (slot < 0 || slot >= PATCH_LIST_SLOTS) return -1;
+        int target = browse_page * PATCH_LIST_SLOTS + slot;
+        if (browse_bank == 0) {
+            if (target >= 0 && target < (int)patches.size()) return target;
+            return -1;
+        }
+        if (browse_bank < 1 || browse_bank >= (int)categories.size()) return -1;
+        const std::string& cat = categories[browse_bank];
+        int cur = 0;
+        for (size_t i = 0; i < patches.size(); ++i) {
+            if (patches[i].folder == cat) {
+                if (cur == target) return (int)i;
+                cur++;
+            }
+        }
+        return -1;
+    }
+
     HelmInstance() {
         engine.setSampleRate(44100);
         engine.setBufferSize(128);
@@ -579,6 +621,39 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
         }
     }
 
+    if (strncmp(key, "bank_slot_", 10) == 0) {
+        int slot = atoi(key + 10) - 1;
+        if (slot >= 0 && slot < HelmInstance::BANK_LIST_SLOTS && slot < (int)inst->categories.size()) {
+            inst->browse_bank = slot;
+            inst->browse_page = 0;
+        }
+        return;
+    }
+    if (strncmp(key, "patch_slot_", 11) == 0) {
+        int slot = atoi(key + 11) - 1;
+        int idx = inst->get_patch_index_at_slot(slot);
+        if (idx >= 0 && idx < (int)inst->patches.size()) {
+            inst->set_category(inst->browse_bank);
+            for (size_t fi = 0; fi < inst->filtered_indices.size(); ++fi) {
+                if (inst->filtered_indices[fi] == idx) {
+                    inst->load_preset((int)fi);
+                    break;
+                }
+            }
+        }
+        return;
+    }
+    if (strcmp(key, "patch_page_next") == 0) {
+        int pages = inst->browse_page_count();
+        inst->browse_page = (inst->browse_page + 1) % pages;
+        return;
+    }
+    if (strcmp(key, "patch_page_prev") == 0) {
+        int pages = inst->browse_page_count();
+        inst->browse_page = (inst->browse_page - 1 + pages) % pages;
+        return;
+    }
+
     if (inst->controls.count(key)) {
         float v = (float)atof(val);
         inst->controls[key]->set(v);
@@ -589,6 +664,47 @@ static int helm_get_param(void *inst_ptr, const char *key, char *buf, int buf_le
     if (!inst_ptr || !key || !buf || buf_len < 1) return 0;
     HelmInstance *inst = (HelmInstance *)inst_ptr;
     std::lock_guard<std::mutex> lock(inst->mtx);
+
+    size_t kl = strlen(key);
+    if (kl > 3 && strcmp(key + kl - 3, "_on") == 0) {
+        if (strncmp(key, "bank_slot_", 10) == 0) {
+            int slot = atoi(key + 10) - 1;
+            return snprintf(buf, buf_len, "%d", slot == inst->browse_bank ? 1 : 0);
+        }
+        if (strncmp(key, "patch_slot_", 11) == 0) {
+            int slot = atoi(key + 11) - 1;
+            int idx = inst->get_patch_index_at_slot(slot);
+            int cur_idx = (!inst->filtered_indices.empty() && inst->current_preset >= 0 && inst->current_preset < (int)inst->filtered_indices.size())
+                          ? inst->filtered_indices[inst->current_preset] : -1;
+            return snprintf(buf, buf_len, "%d", (idx >= 0 && idx == cur_idx) ? 1 : 0);
+        }
+    }
+    if (strncmp(key, "bank_slot_", 10) == 0) {
+        int slot = atoi(key + 10) - 1;
+        if (slot < 0 || slot >= HelmInstance::BANK_LIST_SLOTS || slot >= (int)inst->categories.size()) {
+            buf[0] = '\0';
+            return 0;
+        }
+        return snprintf(buf, buf_len, "%s", inst->categories[slot].c_str());
+    }
+    if (strncmp(key, "patch_slot_", 11) == 0) {
+        int slot = atoi(key + 11) - 1;
+        int idx = inst->get_patch_index_at_slot(slot);
+        if (idx < 0 || idx >= (int)inst->patches.size()) {
+            buf[0] = '\0';
+            return 0;
+        }
+        return snprintf(buf, buf_len, "%s", inst->patches[idx].name.c_str());
+    }
+    if (strcmp(key, "browse_bank_name") == 0) {
+        if (inst->browse_bank >= 0 && inst->browse_bank < (int)inst->categories.size()) {
+            return snprintf(buf, buf_len, "%s", inst->categories[inst->browse_bank].c_str());
+        }
+        return snprintf(buf, buf_len, "All");
+    }
+    if (strcmp(key, "patch_page_text") == 0) {
+        return snprintf(buf, buf_len, "PAGE %d/%d", inst->browse_page + 1, inst->browse_page_count());
+    }
 
     if (strcmp(key, "state") == 0) {
         std::string s = inst->serialize_state();

@@ -2071,6 +2071,368 @@
       "default": 0,
       "display": "int",
       "unit": "%"
+    },
+    {
+      "key": "browse_bank_name",
+      "name": "Browse Category",
+      "display": "string",
+      "type": "readout"
+    },
+    {
+      "key": "patch_page_prev",
+      "name": "Prev Page",
+      "min": 0,
+      "max": 1,
+      "momentary": true
+    },
+    {
+      "key": "patch_page_next",
+      "name": "Next Page",
+      "min": 0,
+      "max": 1,
+      "momentary": true
+    },
+    {
+      "key": "patch_page_text",
+      "name": "Page Text",
+      "display": "string",
+      "type": "readout"
+    },
+    {
+      "key": "bank_slot_1",
+      "name": "Bank 1",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_2",
+      "name": "Bank 2",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_3",
+      "name": "Bank 3",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_4",
+      "name": "Bank 4",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_5",
+      "name": "Bank 5",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_6",
+      "name": "Bank 6",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_7",
+      "name": "Bank 7",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_8",
+      "name": "Bank 8",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_9",
+      "name": "Bank 9",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_10",
+      "name": "Bank 10",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_11",
+      "name": "Bank 11",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_12",
+      "name": "Bank 12",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_13",
+      "name": "Bank 13",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "bank_slot_14",
+      "name": "Bank 14",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_1",
+      "name": "Patch 1",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_2",
+      "name": "Patch 2",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_3",
+      "name": "Patch 3",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_4",
+      "name": "Patch 4",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_5",
+      "name": "Patch 5",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_6",
+      "name": "Patch 6",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_7",
+      "name": "Patch 7",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_8",
+      "name": "Patch 8",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_9",
+      "name": "Patch 9",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_10",
+      "name": "Patch 10",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_11",
+      "name": "Patch 11",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_12",
+      "name": "Patch 12",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_13",
+      "name": "Patch 13",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_14",
+      "name": "Patch 14",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_15",
+      "name": "Patch 15",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_16",
+      "name": "Patch 16",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_17",
+      "name": "Patch 17",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_18",
+      "name": "Patch 18",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_19",
+      "name": "Patch 19",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_20",
+      "name": "Patch 20",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_21",
+      "name": "Patch 21",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_22",
+      "name": "Patch 22",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_23",
+      "name": "Patch 23",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_24",
+      "name": "Patch 24",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_25",
+      "name": "Patch 25",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_26",
+      "name": "Patch 26",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_27",
+      "name": "Patch 27",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
+    },
+    {
+      "key": "patch_slot_28",
+      "name": "Patch 28",
+      "display": "string",
+      "type": "readout",
+      "min": 0,
+      "max": 1
     }
   ],
   "sections": [

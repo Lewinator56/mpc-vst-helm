@@ -169,3 +169,30 @@ text {
   letter-spacing: 0.05em;
   font-weight: 600;
 }
+
+/* Dot-Matrix LCD */
+.dot-bezel {
+  fill: var(--display-bezel);
+  stroke: var(--line);
+  stroke-width: 1.5;
+  rx: 4px;
+}
+.dot-cell {
+  fill: var(--display-cell);
+}
+.dot-arrow {
+  fill: var(--accent-hi);
+}
+
+/* List Tiles (Preset / Bank Browser) */
+.tile {
+  fill: #101418;
+  stroke: #222b33;
+  stroke-width: 1.5;
+  rx: 4px;
+}
+.tile-border {
+  fill: none;
+  stroke: #38c5c5;
+  stroke-width: 2.5;
+}
