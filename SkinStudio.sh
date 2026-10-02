@@ -7,4 +7,8 @@ if ! command -v python3 >/dev/null 2>&1; then
   echo "Skin Studio needs Python 3: https://www.python.org/downloads/"
   printf "Press Return to close. "; read -r _; exit 1
 fi
-python3 tools/studio.py serve --open "$@" || { printf "Press Return to close. "; read -r _; }
+if [ $# -eq 0 ]; then
+  python3 tools/studio.py serve --host 0.0.0.0 layout.conf
+else
+  python3 tools/studio.py serve "$@"
+fi

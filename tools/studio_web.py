@@ -514,6 +514,8 @@ def handler(st, host, stop):
 
         def host_ok(self):
             """Only requests addressed to this machine by name or loopback address (no DNS rebinding)."""
+            if host in ("0.0.0.0", "::"):
+                return True
             h = self.headers.get("Host") or ""
             h = h[1:h.find("]")] if h.startswith("[") else h.split(":")[0]
             return h in LOCAL_HOSTS or h == host
