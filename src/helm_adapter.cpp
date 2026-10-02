@@ -537,9 +537,25 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
         inst->set_category(atoi(val));
         return;
     }
+    if (strcmp(key, "category_prev") == 0) {
+        inst->set_category(inst->current_category - 1);
+        return;
+    }
+    if (strcmp(key, "category_next") == 0) {
+        inst->set_category(inst->current_category + 1);
+        return;
+    }
     if (strcmp(key, "preset") == 0) {
         int idx = atoi(val);
         inst->load_preset(idx);
+        return;
+    }
+    if (strcmp(key, "preset_prev") == 0) {
+        inst->load_preset(inst->current_preset - 1);
+        return;
+    }
+    if (strcmp(key, "preset_next") == 0) {
+        inst->load_preset(inst->current_preset + 1);
         return;
     }
     if (strncmp(key, "mod_", 4) == 0) {
