@@ -5,12 +5,12 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "=== 1. Generating parameters, skin, and XML descriptor ==="
-python3 ../mpc-vst-plugins/tools/gen_vst.py vst.json
+python3 tools/gen_vst.py vst.json
 
 echo "=== 2. Cross-compiling ARM32 binary (helm.so) ==="
 mkdir -p build
 
-eval "$(python3 ../mpc-vst-plugins/tools/gen_vst.py vst.json --shell)"
+eval "$(python3 tools/gen_vst.py vst.json --shell)"
 
 OBJS=""
 for f in $SOURCES; do
@@ -26,7 +26,7 @@ for f in $SOURCES; do
   OBJS="$OBJS $o"
 done
 
-arm-linux-gnueabihf-gcc -O2 -Wall -Wextra -Wno-unused-parameter -fPIC -fvisibility=hidden -std=gnu11 -Ibuild -c ../mpc-vst-plugins/wrapper/vst2_wrap.c -o build/vst2_wrap.o
+arm-linux-gnueabihf-gcc -O2 -Wall -Wextra -Wno-unused-parameter -fPIC -fvisibility=hidden -std=gnu11 -Ibuild -c wrapper/vst2_wrap.c -o build/vst2_wrap.o
 arm-linux-gnueabihf-g++ -O2 -shared -fPIC -fvisibility=hidden $OBJS build/vst2_wrap.o $LIBS -Wl,--no-undefined -o build/helm.so
 arm-linux-gnueabihf-strip build/helm.so
 
