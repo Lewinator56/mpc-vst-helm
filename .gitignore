@@ -1,0 +1,14 @@
+# Build artifacts
+build/
+*.o
+*.so
+*.a
+*.d
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
