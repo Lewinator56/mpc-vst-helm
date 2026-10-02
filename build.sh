@@ -39,10 +39,12 @@ ls -lh build/helm.so
 echo "=== 4. Packaging Release Bundle ==="
 PACKAGE_DIR="build/package/Matt Tytel - VST - Helm"
 mkdir -p "$PACKAGE_DIR"
+cp -r "build/skin/Matt Tytel - VST - Helm/"* "$PACKAGE_DIR/"
 cp build/helm.so "$PACKAGE_DIR/"
-cp -r "build/skin/Matt Tytel - VST - Helm/Plugin Skins" "$PACKAGE_DIR/"
 cp -r "patches/Factory Presets" "$PACKAGE_DIR/patches"
-cp build/pluginlist-entry.xml "$PACKAGE_DIR/" 2>/dev/null || true
+if [ -f build/pluginlist-entry.xml ]; then
+  sed 's|file="[^"]*helm.so"|file="%payload-path%/Matt Tytel - VST - Helm/helm.so"|' build/pluginlist-entry.xml > "$PACKAGE_DIR/plugin-meta.xml"
+fi
 
 echo "=== BUILD COMPLETE ==="
 echo "Plugin packaged at: $PACKAGE_DIR"
