@@ -148,9 +148,12 @@ struct HelmInstance {
     ModSlot mod_slots[NUM_MOD_SLOTS];
 
     std::vector<PatchEntry> patches;
+    std::vector<std::string> categories;
+    int current_category = 0;
+    std::vector<int> filtered_indices;
     int current_preset = 0;
     std::string current_patch_name = "Init";
-    std::string current_folder_name = "Default";
+    std::string current_folder_name = "All";
     std::string current_author = "Matt Tytel";
 
     HelmInstance() {
@@ -202,6 +205,50 @@ struct HelmInstance {
         }
     }
 
+    void update_categories() {
+        categories.clear();
+        categories.push_back("All");
+        std::set<std::string> cats;
+        for (const auto& pe : patches) {
+            if (!pe.folder.empty()) cats.insert(pe.folder);
+        }
+        for (const auto& c : cats) {
+            categories.push_back(c);
+        }
+        update_filtered_indices();
+    }
+
+    void update_filtered_indices() {
+        filtered_indices.clear();
+        if (current_category <= 0 || current_category >= (int)categories.size()) {
+            current_category = 0;
+            current_folder_name = "All";
+            for (int i = 0; i < (int)patches.size(); ++i) {
+                filtered_indices.push_back(i);
+            }
+        } else {
+            const std::string& cat = categories[current_category];
+            current_folder_name = cat;
+            for (int i = 0; i < (int)patches.size(); ++i) {
+                if (patches[i].folder == cat) {
+                    filtered_indices.push_back(i);
+                }
+            }
+        }
+        if (filtered_indices.empty() && !patches.empty()) {
+            filtered_indices.push_back(0);
+        }
+    }
+
+    void set_category(int cat_idx) {
+        if (categories.empty()) return;
+        if (cat_idx < 0) cat_idx = 0;
+        if (cat_idx >= (int)categories.size()) cat_idx = (int)categories.size() - 1;
+        current_category = cat_idx;
+        update_filtered_indices();
+        load_preset(0);
+    }
+
     void scan_patches_dir(const std::string& base_dir) {
         patches.clear();
         DIR* dir = opendir(base_dir.c_str());
@@ -249,21 +296,31 @@ struct HelmInstance {
                 patches.push_back(pe);
             }
         }
+        update_categories();
     }
 
     void load_preset(int index) {
-        if (patches.empty()) return;
+        if (filtered_indices.empty()) return;
         if (index < 0) index = 0;
-        if (index >= (int)patches.size()) index = (int)patches.size() - 1;
+        if (index >= (int)filtered_indices.size()) index = (int)filtered_indices.size() - 1;
         current_preset = index;
 
-        const PatchEntry& pe = patches[index];
+        int patch_idx = filtered_indices[index];
+        if (patch_idx < 0 || patch_idx >= (int)patches.size()) return;
+
+        const PatchEntry& pe = patches[patch_idx];
         std::ifstream ifs(pe.path);
         if (!ifs.is_open()) return;
 
         std::stringstream ss;
         ss << ifs.rdbuf();
         load_patch_json(ss.str());
+        current_patch_name = pe.name;
+        if (current_category > 0 && current_category < (int)categories.size()) {
+            current_folder_name = categories[current_category];
+        } else {
+            current_folder_name = pe.folder;
+        }
     }
 
     void load_patch_json(const std::string& json_str) {
@@ -476,6 +533,10 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
         inst->restore_state(val);
         return;
     }
+    if (strcmp(key, "category") == 0) {
+        inst->set_category(atoi(val));
+        return;
+    }
     if (strcmp(key, "preset") == 0) {
         int idx = atoi(val);
         inst->load_preset(idx);
@@ -516,6 +577,10 @@ static int helm_get_param(void *inst_ptr, const char *key, char *buf, int buf_le
         if ((int)s.size() + 1 > buf_len) return 0;
         snprintf(buf, buf_len, "%s", s.c_str());
         return (int)s.size();
+    }
+    if (strcmp(key, "category") == 0) {
+        snprintf(buf, buf_len, "%d", inst->current_category);
+        return 1;
     }
     if (strcmp(key, "preset") == 0) {
         snprintf(buf, buf_len, "%d", inst->current_preset);

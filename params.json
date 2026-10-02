@@ -2,6 +2,33 @@
   "name": "Helm",
   "params": [
     {
+      "key": "category",
+      "name": "Category",
+      "min": 0,
+      "max": 12,
+      "default": 0,
+      "display": "int",
+      "type": "stepper"
+    },
+    {
+      "key": "category_prev",
+      "name": "Prev Category",
+      "min": 0,
+      "max": 1,
+      "momentary": true,
+      "step_of": "category",
+      "step_delta": -1
+    },
+    {
+      "key": "category_next",
+      "name": "Next Category",
+      "min": 0,
+      "max": 1,
+      "momentary": true,
+      "step_of": "category",
+      "step_delta": 1
+    },
+    {
       "key": "preset",
       "name": "Preset",
       "min": 0,
@@ -1816,13 +1843,16 @@
   ],
   "sections": [
     {
-      "label": "Main & Presets",
+      "label": "Main",
       "keys": [
+        "category",
+        "category_prev",
+        "category_next",
+        "folder_name",
         "preset",
         "preset_prev",
         "preset_next",
         "patch_name",
-        "folder_name",
         "author",
         "volume",
         "polyphony",
@@ -1834,7 +1864,7 @@
       ]
     },
     {
-      "label": "Oscillator 1",
+      "label": "Osc 1",
       "keys": [
         "osc_1_waveform",
         "osc_1_transpose",
@@ -1847,7 +1877,7 @@
       ]
     },
     {
-      "label": "Oscillator 2",
+      "label": "Osc 2",
       "keys": [
         "osc_2_waveform",
         "osc_2_transpose",
@@ -1889,7 +1919,7 @@
       ]
     },
     {
-      "label": "Amp Envelope",
+      "label": "Amp Env",
       "keys": [
         "amp_attack",
         "amp_decay",
@@ -1898,7 +1928,7 @@
       ]
     },
     {
-      "label": "Filter Envelope",
+      "label": "Filter Env",
       "keys": [
         "fil_attack",
         "fil_decay",
@@ -1907,7 +1937,7 @@
       ]
     },
     {
-      "label": "Mod Envelope",
+      "label": "Mod Env",
       "keys": [
         "mod_attack",
         "mod_decay",
@@ -1948,7 +1978,7 @@
       ]
     },
     {
-      "label": "Arpeggiator",
+      "label": "Arp",
       "keys": [
         "arp_on",
         "arp_pattern",
@@ -1960,7 +1990,7 @@
       ]
     },
     {
-      "label": "Step Sequencer",
+      "label": "Step Seq",
       "keys": [
         "num_steps",
         "step_smoothing",
@@ -2008,7 +2038,7 @@
       ]
     },
     {
-      "label": "Mod Matrix 1-4",
+      "label": "Mod 1-4",
       "keys": [
         "mod_1_source",
         "mod_1_dest",
@@ -2025,7 +2055,7 @@
       ]
     },
     {
-      "label": "Mod Matrix 5-8",
+      "label": "Mod 5-8",
       "keys": [
         "mod_5_source",
         "mod_5_dest",

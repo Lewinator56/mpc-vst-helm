@@ -108,6 +108,33 @@ def build_params():
     # 1. Preset Navigation
     params.extend([
         {
+            "key": "category",
+            "name": "Category",
+            "min": 0,
+            "max": 12,
+            "default": 0,
+            "display": "int",
+            "type": "stepper"
+        },
+        {
+            "key": "category_prev",
+            "name": "Prev Category",
+            "min": 0,
+            "max": 1,
+            "momentary": True,
+            "step_of": "category",
+            "step_delta": -1
+        },
+        {
+            "key": "category_next",
+            "name": "Next Category",
+            "min": 0,
+            "max": 1,
+            "momentary": True,
+            "step_of": "category",
+            "step_delta": 1
+        },
+        {
             "key": "preset",
             "name": "Preset",
             "min": 0,
@@ -344,15 +371,15 @@ def build_params():
 
     sections = [
         {
-            "label": "Main & Presets",
-            "keys": ["preset", "preset_prev", "preset_next", "patch_name", "folder_name", "author", "volume", "polyphony", "legato", "portamento", "portamento_type", "pitch_bend_range", "velocity_track"]
+            "label": "Main",
+            "keys": ["category", "category_prev", "category_next", "folder_name", "preset", "preset_prev", "preset_next", "patch_name", "author", "volume", "polyphony", "legato", "portamento", "portamento_type", "pitch_bend_range", "velocity_track"]
         },
         {
-            "label": "Oscillator 1",
+            "label": "Osc 1",
             "keys": ["osc_1_waveform", "osc_1_transpose", "osc_1_tune", "osc_1_volume", "osc_1_unison_voices", "osc_1_unison_detune", "unison_1_harmonize", "cross_modulation"]
         },
         {
-            "label": "Oscillator 2",
+            "label": "Osc 2",
             "keys": ["osc_2_waveform", "osc_2_transpose", "osc_2_tune", "osc_2_volume", "osc_2_unison_voices", "osc_2_unison_detune", "unison_2_harmonize", "osc_feedback_amount", "osc_feedback_transpose", "osc_feedback_tune"]
         },
         {
@@ -364,15 +391,15 @@ def build_params():
             "keys": ["filter_on", "filter_style", "filter_shelf", "cutoff", "resonance", "filter_drive", "filter_blend", "fil_env_depth", "keytrack", "formant_on", "formant_x", "formant_y"]
         },
         {
-            "label": "Amp Envelope",
+            "label": "Amp Env",
             "keys": ["amp_attack", "amp_decay", "amp_sustain", "amp_release"]
         },
         {
-            "label": "Filter Envelope",
+            "label": "Filter Env",
             "keys": ["fil_attack", "fil_decay", "fil_sustain", "fil_release"]
         },
         {
-            "label": "Mod Envelope",
+            "label": "Mod Env",
             "keys": ["mod_attack", "mod_decay", "mod_sustain", "mod_release"]
         },
         {
@@ -388,11 +415,11 @@ def build_params():
             "keys": ["poly_lfo_waveform", "poly_lfo_amplitude", "poly_lfo_frequency", "poly_lfo_sync", "poly_lfo_tempo"]
         },
         {
-            "label": "Arpeggiator",
+            "label": "Arp",
             "keys": ["arp_on", "arp_pattern", "arp_octaves", "arp_gate", "arp_frequency", "arp_sync", "arp_tempo"]
         },
         {
-            "label": "Step Sequencer",
+            "label": "Step Seq",
             "keys": ["num_steps", "step_smoothing", "step_frequency", "step_sequencer_sync", "step_sequencer_tempo", "step_sequencer_retrigger"]
         },
         {
@@ -408,11 +435,11 @@ def build_params():
             "keys": ["delay_on", "delay_frequency", "delay_sync", "delay_tempo", "delay_feedback", "delay_dry_wet", "reverb_on", "reverb_feedback", "reverb_damping", "reverb_dry_wet"]
         },
         {
-            "label": "Mod Matrix 1-4",
+            "label": "Mod 1-4",
             "keys": ["mod_1_source", "mod_1_dest", "mod_1_amount", "mod_2_source", "mod_2_dest", "mod_2_amount", "mod_3_source", "mod_3_dest", "mod_3_amount", "mod_4_source", "mod_4_dest", "mod_4_amount"]
         },
         {
-            "label": "Mod Matrix 5-8",
+            "label": "Mod 5-8",
             "keys": ["mod_5_source", "mod_5_dest", "mod_5_amount", "mod_6_source", "mod_6_dest", "mod_6_amount", "mod_7_source", "mod_7_dest", "mod_7_amount", "mod_8_source", "mod_8_dest", "mod_8_amount"]
         }
     ]
