@@ -554,7 +554,9 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
                 inst->mod_slots[slot_idx].dest_idx = atoi(val);
                 inst->update_slot(slot_idx);
             } else if (strcmp(field, "amount") == 0) {
-                inst->mod_slots[slot_idx].amount = (float)atof(val);
+                float val_f = (float)atof(val);
+                if (fabsf(val_f) > 1.0f) val_f /= 100.0f;
+                inst->mod_slots[slot_idx].amount = val_f;
                 inst->update_slot(slot_idx);
             }
             return;
@@ -610,7 +612,8 @@ static int helm_get_param(void *inst_ptr, const char *key, char *buf, int buf_le
                 snprintf(buf, buf_len, "%d", inst->mod_slots[slot_idx].dest_idx);
                 return 1;
             } else if (strcmp(field, "amount") == 0) {
-                snprintf(buf, buf_len, "%g", inst->mod_slots[slot_idx].amount);
+                int val_i = (int)lroundf(inst->mod_slots[slot_idx].amount * 100.0f);
+                snprintf(buf, buf_len, "%d", val_i);
                 return 1;
             }
         }

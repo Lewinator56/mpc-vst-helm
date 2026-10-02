@@ -1205,9 +1205,10 @@
     {
       "key": "mod_1_amount",
       "name": "Mod 1 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1295,9 +1296,10 @@
     {
       "key": "mod_2_amount",
       "name": "Mod 2 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1385,9 +1387,10 @@
     {
       "key": "mod_3_amount",
       "name": "Mod 3 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1475,9 +1478,10 @@
     {
       "key": "mod_4_amount",
       "name": "Mod 4 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1565,9 +1569,10 @@
     {
       "key": "mod_5_amount",
       "name": "Mod 5 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1655,9 +1660,10 @@
     {
       "key": "mod_6_amount",
       "name": "Mod 6 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1745,9 +1751,10 @@
     {
       "key": "mod_7_amount",
       "name": "Mod 7 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     },
     {
@@ -1835,9 +1842,10 @@
     {
       "key": "mod_8_amount",
       "name": "Mod 8 Depth",
-      "min": -1.0,
-      "max": 1.0,
-      "default": 0.0,
+      "min": -100,
+      "max": 100,
+      "default": 0,
+      "display": "int",
       "unit": "%"
     }
   ],
@@ -1864,7 +1872,7 @@
       ]
     },
     {
-      "label": "Osc 1",
+      "label": "Osc",
       "keys": [
         "osc_1_waveform",
         "osc_1_transpose",
@@ -1873,32 +1881,29 @@
         "osc_1_unison_voices",
         "osc_1_unison_detune",
         "unison_1_harmonize",
-        "cross_modulation"
-      ]
-    },
-    {
-      "label": "Osc 2",
-      "keys": [
+        "cross_modulation",
         "osc_2_waveform",
         "osc_2_transpose",
         "osc_2_tune",
         "osc_2_volume",
         "osc_2_unison_voices",
         "osc_2_unison_detune",
-        "unison_2_harmonize",
-        "osc_feedback_amount",
-        "osc_feedback_transpose",
-        "osc_feedback_tune"
+        "unison_2_harmonize"
       ]
     },
     {
-      "label": "Sub & Noise",
+      "label": "Mixer",
       "keys": [
         "sub_waveform",
         "sub_octave",
         "sub_shuffle",
         "sub_volume",
-        "noise_volume"
+        "noise_volume",
+        "osc_feedback_amount",
+        "osc_feedback_transpose",
+        "osc_feedback_tune",
+        "osc_1_volume",
+        "osc_2_volume"
       ]
     },
     {
@@ -1919,26 +1924,16 @@
       ]
     },
     {
-      "label": "Amp Env",
+      "label": "Env",
       "keys": [
         "amp_attack",
         "amp_decay",
         "amp_sustain",
-        "amp_release"
-      ]
-    },
-    {
-      "label": "Filter Env",
-      "keys": [
+        "amp_release",
         "fil_attack",
         "fil_decay",
         "fil_sustain",
-        "fil_release"
-      ]
-    },
-    {
-      "label": "Mod Env",
-      "keys": [
+        "fil_release",
         "mod_attack",
         "mod_decay",
         "mod_sustain",
@@ -1946,30 +1941,20 @@
       ]
     },
     {
-      "label": "Mono LFO 1",
+      "label": "LFO",
       "keys": [
         "mono_lfo_1_waveform",
         "mono_lfo_1_amplitude",
         "mono_lfo_1_frequency",
         "mono_lfo_1_sync",
         "mono_lfo_1_tempo",
-        "mono_lfo_1_retrigger"
-      ]
-    },
-    {
-      "label": "Mono LFO 2",
-      "keys": [
+        "mono_lfo_1_retrigger",
         "mono_lfo_2_waveform",
         "mono_lfo_2_amplitude",
         "mono_lfo_2_frequency",
         "mono_lfo_2_sync",
         "mono_lfo_2_tempo",
-        "mono_lfo_2_retrigger"
-      ]
-    },
-    {
-      "label": "Poly LFO",
-      "keys": [
+        "mono_lfo_2_retrigger",
         "poly_lfo_waveform",
         "poly_lfo_amplitude",
         "poly_lfo_frequency",
@@ -1978,19 +1963,7 @@
       ]
     },
     {
-      "label": "Arp",
-      "keys": [
-        "arp_on",
-        "arp_pattern",
-        "arp_octaves",
-        "arp_gate",
-        "arp_frequency",
-        "arp_sync",
-        "arp_tempo"
-      ]
-    },
-    {
-      "label": "Step Seq",
+      "label": "Step",
       "keys": [
         "num_steps",
         "step_smoothing",
@@ -2001,44 +1974,7 @@
       ]
     },
     {
-      "label": "Distortion",
-      "keys": [
-        "distortion_on",
-        "distortion_type",
-        "distortion_drive",
-        "distortion_mix"
-      ]
-    },
-    {
-      "label": "Stutter",
-      "keys": [
-        "stutter_on",
-        "stutter_frequency",
-        "stutter_sync",
-        "stutter_tempo",
-        "stutter_softness",
-        "stutter_resample_frequency",
-        "stutter_resample_sync",
-        "stutter_resample_tempo"
-      ]
-    },
-    {
-      "label": "Delay & Reverb",
-      "keys": [
-        "delay_on",
-        "delay_frequency",
-        "delay_sync",
-        "delay_tempo",
-        "delay_feedback",
-        "delay_dry_wet",
-        "reverb_on",
-        "reverb_feedback",
-        "reverb_damping",
-        "reverb_dry_wet"
-      ]
-    },
-    {
-      "label": "Mod 1-4",
+      "label": "Mod",
       "keys": [
         "mod_1_source",
         "mod_1_dest",
@@ -2051,12 +1987,7 @@
         "mod_3_amount",
         "mod_4_source",
         "mod_4_dest",
-        "mod_4_amount"
-      ]
-    },
-    {
-      "label": "Mod 5-8",
-      "keys": [
+        "mod_4_amount",
         "mod_5_source",
         "mod_5_dest",
         "mod_5_amount",
@@ -2069,6 +2000,30 @@
         "mod_8_source",
         "mod_8_dest",
         "mod_8_amount"
+      ]
+    },
+    {
+      "label": "FX",
+      "keys": [
+        "distortion_on",
+        "distortion_type",
+        "distortion_drive",
+        "distortion_mix",
+        "stutter_on",
+        "stutter_frequency",
+        "stutter_sync",
+        "stutter_tempo",
+        "stutter_softness",
+        "delay_on",
+        "delay_frequency",
+        "delay_sync",
+        "delay_tempo",
+        "delay_feedback",
+        "delay_dry_wet",
+        "reverb_on",
+        "reverb_feedback",
+        "reverb_damping",
+        "reverb_dry_wet"
       ]
     }
   ]

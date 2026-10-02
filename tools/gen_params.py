@@ -362,9 +362,10 @@ def build_params():
             {
                 "key": f"mod_{slot}_amount",
                 "name": f"Mod {slot} Depth",
-                "min": -1.0,
-                "max": 1.0,
-                "default": 0.0,
+                "min": -100,
+                "max": 100,
+                "default": 0,
+                "display": "int",
                 "unit": "%"
             }
         ])
@@ -375,72 +376,36 @@ def build_params():
             "keys": ["category", "category_prev", "category_next", "folder_name", "preset", "preset_prev", "preset_next", "patch_name", "author", "volume", "polyphony", "legato", "portamento", "portamento_type", "pitch_bend_range", "velocity_track"]
         },
         {
-            "label": "Osc 1",
-            "keys": ["osc_1_waveform", "osc_1_transpose", "osc_1_tune", "osc_1_volume", "osc_1_unison_voices", "osc_1_unison_detune", "unison_1_harmonize", "cross_modulation"]
+            "label": "Osc",
+            "keys": ["osc_1_waveform", "osc_1_transpose", "osc_1_tune", "osc_1_volume", "osc_1_unison_voices", "osc_1_unison_detune", "unison_1_harmonize", "cross_modulation", "osc_2_waveform", "osc_2_transpose", "osc_2_tune", "osc_2_volume", "osc_2_unison_voices", "osc_2_unison_detune", "unison_2_harmonize"]
         },
         {
-            "label": "Osc 2",
-            "keys": ["osc_2_waveform", "osc_2_transpose", "osc_2_tune", "osc_2_volume", "osc_2_unison_voices", "osc_2_unison_detune", "unison_2_harmonize", "osc_feedback_amount", "osc_feedback_transpose", "osc_feedback_tune"]
-        },
-        {
-            "label": "Sub & Noise",
-            "keys": ["sub_waveform", "sub_octave", "sub_shuffle", "sub_volume", "noise_volume"]
+            "label": "Mixer",
+            "keys": ["sub_waveform", "sub_octave", "sub_shuffle", "sub_volume", "noise_volume", "osc_feedback_amount", "osc_feedback_transpose", "osc_feedback_tune", "osc_1_volume", "osc_2_volume"]
         },
         {
             "label": "Filter",
             "keys": ["filter_on", "filter_style", "filter_shelf", "cutoff", "resonance", "filter_drive", "filter_blend", "fil_env_depth", "keytrack", "formant_on", "formant_x", "formant_y"]
         },
         {
-            "label": "Amp Env",
-            "keys": ["amp_attack", "amp_decay", "amp_sustain", "amp_release"]
+            "label": "Env",
+            "keys": ["amp_attack", "amp_decay", "amp_sustain", "amp_release", "fil_attack", "fil_decay", "fil_sustain", "fil_release", "mod_attack", "mod_decay", "mod_sustain", "mod_release"]
         },
         {
-            "label": "Filter Env",
-            "keys": ["fil_attack", "fil_decay", "fil_sustain", "fil_release"]
+            "label": "LFO",
+            "keys": ["mono_lfo_1_waveform", "mono_lfo_1_amplitude", "mono_lfo_1_frequency", "mono_lfo_1_sync", "mono_lfo_1_tempo", "mono_lfo_1_retrigger", "mono_lfo_2_waveform", "mono_lfo_2_amplitude", "mono_lfo_2_frequency", "mono_lfo_2_sync", "mono_lfo_2_tempo", "mono_lfo_2_retrigger", "poly_lfo_waveform", "poly_lfo_amplitude", "poly_lfo_frequency", "poly_lfo_sync", "poly_lfo_tempo"]
         },
         {
-            "label": "Mod Env",
-            "keys": ["mod_attack", "mod_decay", "mod_sustain", "mod_release"]
-        },
-        {
-            "label": "Mono LFO 1",
-            "keys": ["mono_lfo_1_waveform", "mono_lfo_1_amplitude", "mono_lfo_1_frequency", "mono_lfo_1_sync", "mono_lfo_1_tempo", "mono_lfo_1_retrigger"]
-        },
-        {
-            "label": "Mono LFO 2",
-            "keys": ["mono_lfo_2_waveform", "mono_lfo_2_amplitude", "mono_lfo_2_frequency", "mono_lfo_2_sync", "mono_lfo_2_tempo", "mono_lfo_2_retrigger"]
-        },
-        {
-            "label": "Poly LFO",
-            "keys": ["poly_lfo_waveform", "poly_lfo_amplitude", "poly_lfo_frequency", "poly_lfo_sync", "poly_lfo_tempo"]
-        },
-        {
-            "label": "Arp",
-            "keys": ["arp_on", "arp_pattern", "arp_octaves", "arp_gate", "arp_frequency", "arp_sync", "arp_tempo"]
-        },
-        {
-            "label": "Step Seq",
+            "label": "Step",
             "keys": ["num_steps", "step_smoothing", "step_frequency", "step_sequencer_sync", "step_sequencer_tempo", "step_sequencer_retrigger"]
         },
         {
-            "label": "Distortion",
-            "keys": ["distortion_on", "distortion_type", "distortion_drive", "distortion_mix"]
+            "label": "Mod",
+            "keys": ["mod_1_source", "mod_1_dest", "mod_1_amount", "mod_2_source", "mod_2_dest", "mod_2_amount", "mod_3_source", "mod_3_dest", "mod_3_amount", "mod_4_source", "mod_4_dest", "mod_4_amount", "mod_5_source", "mod_5_dest", "mod_5_amount", "mod_6_source", "mod_6_dest", "mod_6_amount", "mod_7_source", "mod_7_dest", "mod_7_amount", "mod_8_source", "mod_8_dest", "mod_8_amount"]
         },
         {
-            "label": "Stutter",
-            "keys": ["stutter_on", "stutter_frequency", "stutter_sync", "stutter_tempo", "stutter_softness", "stutter_resample_frequency", "stutter_resample_sync", "stutter_resample_tempo"]
-        },
-        {
-            "label": "Delay & Reverb",
-            "keys": ["delay_on", "delay_frequency", "delay_sync", "delay_tempo", "delay_feedback", "delay_dry_wet", "reverb_on", "reverb_feedback", "reverb_damping", "reverb_dry_wet"]
-        },
-        {
-            "label": "Mod 1-4",
-            "keys": ["mod_1_source", "mod_1_dest", "mod_1_amount", "mod_2_source", "mod_2_dest", "mod_2_amount", "mod_3_source", "mod_3_dest", "mod_3_amount", "mod_4_source", "mod_4_dest", "mod_4_amount"]
-        },
-        {
-            "label": "Mod 5-8",
-            "keys": ["mod_5_source", "mod_5_dest", "mod_5_amount", "mod_6_source", "mod_6_dest", "mod_6_amount", "mod_7_source", "mod_7_dest", "mod_7_amount", "mod_8_source", "mod_8_dest", "mod_8_amount"]
+            "label": "FX",
+            "keys": ["distortion_on", "distortion_type", "distortion_drive", "distortion_mix", "stutter_on", "stutter_frequency", "stutter_sync", "stutter_tempo", "stutter_softness", "delay_on", "delay_frequency", "delay_sync", "delay_tempo", "delay_feedback", "delay_dry_wet", "reverb_on", "reverb_feedback", "reverb_damping", "reverb_dry_wet"]
         }
     ]
 
