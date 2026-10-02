@@ -1,0 +1,171 @@
+/* Helm MPC Skin Stylesheet (art_css=helm.css) */
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 700;
+  src: url("fonts/OpenSans-Bold.ttf");
+}
+
+:root {
+  --font: "Open Sans", "Titillium Web", "DejaVu Sans", sans-serif;
+  --title-font: "Open Sans", "Titillium Web", sans-serif;
+  --title-size: 18px;
+  --label-size: 14px;
+  --seg-size: 13px;
+  --button-size: 14px;
+  --radius: 6px;
+  --sheen: 0.12;
+  --shadow: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.75));
+}
+
+text {
+  font-family: var(--font);
+  font-weight: 600;
+}
+
+/* Frames & Panels */
+.frame-border {
+  fill: rgba(14, 18, 22, 0.65);
+  stroke: var(--line);
+  stroke-width: 1.5;
+  rx: 8px;
+}
+.frame-title {
+  font-family: var(--title-font);
+  font-size: var(--title-size);
+  font-weight: 700;
+  fill: var(--accent-hi);
+  letter-spacing: 0.08em;
+}
+
+/* Free text and labels */
+.text {
+  font-size: var(--label-size);
+  letter-spacing: 0.05em;
+}
+
+/* Knobs */
+.knob-track {
+  fill: none;
+  stroke: #1c2228;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.knob-arc {
+  fill: none;
+  stroke: #38c5c5;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.knob-face {
+  fill: #14181c;
+  stroke: #252e36;
+  stroke-width: 1.5;
+  filter: var(--shadow);
+}
+.knob-pointer {
+  stroke: #50e4e4;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+/* Modern Sliders & Draggable Bars */
+.slider-well {
+  fill: #0c0f12;
+  stroke: #222b33;
+  stroke-width: 1.5;
+  rx: 4px;
+}
+.slider-fill {
+  fill: #38c5c5;
+}
+.slider-thumb {
+  fill: #1a2026;
+  stroke: #50e4e4;
+  stroke-width: 2.5;
+  filter: var(--shadow);
+}
+
+/* Fader Look (.look-fader) */
+.look-slot {
+  fill: #0a0d10;
+  stroke: #222b33;
+  stroke-width: 1.5;
+}
+.look-tick {
+  stroke: #2a3540;
+  stroke-width: 1;
+}
+.look-fader {
+  fill: #222a31;
+  stroke: #38c5c5;
+  stroke-width: 1.5;
+  filter: var(--shadow);
+  rx: 3px;
+}
+.look-ridge {
+  stroke: #50e4e4;
+  stroke-width: 1.5;
+}
+
+/* Toggles / Pills */
+.pill-track {
+  fill: #0c0f12;
+  stroke: #252e36;
+  stroke-width: 1.5;
+}
+.pill-thumb {
+  fill: #3a4550;
+  filter: var(--shadow);
+}
+.on .pill-thumb {
+  fill: #38c5c5;
+  filter: drop-shadow(0 0 4px #38c5c5);
+}
+
+/* Buttons */
+.button-bg {
+  fill: #1a2026;
+  stroke: #2a343e;
+  stroke-width: 1.5;
+  filter: var(--shadow);
+  rx: var(--radius);
+}
+.button-tx {
+  font-size: var(--button-size);
+  fill: #e8f1f5;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+/* Text boxes, Readouts, Steppers, Popups */
+.box {
+  fill: #0e1216;
+  stroke: #252e36;
+  stroke-width: 1.5;
+  rx: 5px;
+}
+.box-label {
+  font-size: var(--label-size);
+  fill: var(--ink-dim);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.arrow {
+  fill: #38c5c5;
+}
+.arrow-bg {
+  fill: #1c232a;
+}
+
+/* Option Segments */
+.seg-bg {
+  fill: var(--fill);
+  rx: 4px;
+}
+.seg-tx {
+  font-size: var(--seg-size);
+  fill: var(--ink);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}

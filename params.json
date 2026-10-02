@@ -822,6 +822,230 @@
       "default": 2
     },
     {
+      "key": "step_seq_00",
+      "name": "Step 1",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_01",
+      "name": "Step 2",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_02",
+      "name": "Step 3",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_03",
+      "name": "Step 4",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_04",
+      "name": "Step 5",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_05",
+      "name": "Step 6",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_06",
+      "name": "Step 7",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_07",
+      "name": "Step 8",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_08",
+      "name": "Step 9",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_09",
+      "name": "Step 10",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_10",
+      "name": "Step 11",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_11",
+      "name": "Step 12",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_12",
+      "name": "Step 13",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_13",
+      "name": "Step 14",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_14",
+      "name": "Step 15",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_15",
+      "name": "Step 16",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_16",
+      "name": "Step 17",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_17",
+      "name": "Step 18",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_18",
+      "name": "Step 19",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_19",
+      "name": "Step 20",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_20",
+      "name": "Step 21",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_21",
+      "name": "Step 22",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_22",
+      "name": "Step 23",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_23",
+      "name": "Step 24",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_24",
+      "name": "Step 25",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_25",
+      "name": "Step 26",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_26",
+      "name": "Step 27",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_27",
+      "name": "Step 28",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_28",
+      "name": "Step 29",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_29",
+      "name": "Step 30",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_30",
+      "name": "Step 31",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
+      "key": "step_seq_31",
+      "name": "Step 32",
+      "min": -1.0,
+      "max": 1.0,
+      "default": 0.0
+    },
+    {
       "key": "arp_on",
       "name": "Arp On",
       "options": [
@@ -1854,13 +2078,9 @@
       "label": "Main",
       "keys": [
         "category",
-        "category_prev",
-        "category_next",
-        "folder_name",
         "preset",
-        "preset_prev",
-        "preset_next",
         "patch_name",
+        "folder_name",
         "author",
         "volume",
         "polyphony",
@@ -1872,7 +2092,7 @@
       ]
     },
     {
-      "label": "Osc",
+      "label": "OSC 1",
       "keys": [
         "osc_1_waveform",
         "osc_1_transpose",
@@ -1880,8 +2100,18 @@
         "osc_1_volume",
         "osc_1_unison_voices",
         "osc_1_unison_detune",
-        "unison_1_harmonize",
-        "cross_modulation",
+        "unison_1_harmonize"
+      ]
+    },
+    {
+      "label": "Cross Mod",
+      "keys": [
+        "cross_modulation"
+      ]
+    },
+    {
+      "label": "OSC 2",
+      "keys": [
         "osc_2_waveform",
         "osc_2_transpose",
         "osc_2_tune",
@@ -1892,7 +2122,7 @@
       ]
     },
     {
-      "label": "Mixer",
+      "label": "Sub & Noise",
       "keys": [
         "sub_waveform",
         "sub_octave",
@@ -1901,9 +2131,7 @@
         "noise_volume",
         "osc_feedback_amount",
         "osc_feedback_transpose",
-        "osc_feedback_tune",
-        "osc_1_volume",
-        "osc_2_volume"
+        "osc_feedback_tune"
       ]
     },
     {
@@ -1941,20 +2169,30 @@
       ]
     },
     {
-      "label": "LFO",
+      "label": "LFO 1",
       "keys": [
         "mono_lfo_1_waveform",
         "mono_lfo_1_amplitude",
         "mono_lfo_1_frequency",
         "mono_lfo_1_sync",
         "mono_lfo_1_tempo",
-        "mono_lfo_1_retrigger",
+        "mono_lfo_1_retrigger"
+      ]
+    },
+    {
+      "label": "LFO 2",
+      "keys": [
         "mono_lfo_2_waveform",
         "mono_lfo_2_amplitude",
         "mono_lfo_2_frequency",
         "mono_lfo_2_sync",
         "mono_lfo_2_tempo",
-        "mono_lfo_2_retrigger",
+        "mono_lfo_2_retrigger"
+      ]
+    },
+    {
+      "label": "Poly LFO",
+      "keys": [
         "poly_lfo_waveform",
         "poly_lfo_amplitude",
         "poly_lfo_frequency",
@@ -1963,7 +2201,7 @@
       ]
     },
     {
-      "label": "Step",
+      "label": "Step Control",
       "keys": [
         "num_steps",
         "step_smoothing",
@@ -1971,6 +2209,101 @@
         "step_sequencer_sync",
         "step_sequencer_tempo",
         "step_sequencer_retrigger"
+      ]
+    },
+    {
+      "label": "Steps 1-16",
+      "keys": [
+        "step_seq_00",
+        "step_seq_01",
+        "step_seq_02",
+        "step_seq_03",
+        "step_seq_04",
+        "step_seq_05",
+        "step_seq_06",
+        "step_seq_07",
+        "step_seq_08",
+        "step_seq_09",
+        "step_seq_10",
+        "step_seq_11",
+        "step_seq_12",
+        "step_seq_13",
+        "step_seq_14",
+        "step_seq_15"
+      ]
+    },
+    {
+      "label": "Steps 17-32",
+      "keys": [
+        "step_seq_16",
+        "step_seq_17",
+        "step_seq_18",
+        "step_seq_19",
+        "step_seq_20",
+        "step_seq_21",
+        "step_seq_22",
+        "step_seq_23",
+        "step_seq_24",
+        "step_seq_25",
+        "step_seq_26",
+        "step_seq_27",
+        "step_seq_28",
+        "step_seq_29",
+        "step_seq_30",
+        "step_seq_31"
+      ]
+    },
+    {
+      "label": "Arp",
+      "keys": [
+        "arp_on",
+        "arp_pattern",
+        "arp_octaves",
+        "arp_gate",
+        "arp_frequency",
+        "arp_sync",
+        "arp_tempo"
+      ]
+    },
+    {
+      "label": "Distortion",
+      "keys": [
+        "distortion_on",
+        "distortion_type",
+        "distortion_drive",
+        "distortion_mix"
+      ]
+    },
+    {
+      "label": "Stutter",
+      "keys": [
+        "stutter_on",
+        "stutter_frequency",
+        "stutter_sync",
+        "stutter_tempo",
+        "stutter_softness",
+        "stutter_resample_frequency",
+        "stutter_resample_sync"
+      ]
+    },
+    {
+      "label": "Delay",
+      "keys": [
+        "delay_on",
+        "delay_frequency",
+        "delay_sync",
+        "delay_tempo",
+        "delay_feedback",
+        "delay_dry_wet"
+      ]
+    },
+    {
+      "label": "Reverb",
+      "keys": [
+        "reverb_on",
+        "reverb_feedback",
+        "reverb_damping",
+        "reverb_dry_wet"
       ]
     },
     {
@@ -2000,30 +2333,6 @@
         "mod_8_source",
         "mod_8_dest",
         "mod_8_amount"
-      ]
-    },
-    {
-      "label": "FX",
-      "keys": [
-        "distortion_on",
-        "distortion_type",
-        "distortion_drive",
-        "distortion_mix",
-        "stutter_on",
-        "stutter_frequency",
-        "stutter_sync",
-        "stutter_tempo",
-        "stutter_softness",
-        "delay_on",
-        "delay_frequency",
-        "delay_sync",
-        "delay_tempo",
-        "delay_feedback",
-        "delay_dry_wet",
-        "reverb_on",
-        "reverb_feedback",
-        "reverb_damping",
-        "reverb_dry_wet"
       ]
     }
   ]
