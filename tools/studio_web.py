@@ -415,9 +415,21 @@ class Studio:
                 "template": os.path.join(HERE, "skin_template.conf"), "sep": os.sep,
                 "dir": os.path.dirname(rs[0]["layout"]) if rs else os.path.dirname(REPO)}
 
+    def reload_params(self):
+        if self.params_path and os.path.isfile(self.params_path):
+            try:
+                ps, secs = studio.load_params(self.params_path)
+                self.params = [{"key": p["key"], "name": p.get("name", p["key"]), "options": [str(o) for o in p.get("options") or []],
+                                "hint": studio.kind_for(p)} for p in ps]
+                self.sections = secs or []
+                self.by_key = {p["key"]: p for p in self.params}
+            except Exception:
+                pass
+
     def doc(self):
         if not self.layout:
             return self.start()
+        self.reload_params()
         if not os.path.exists(self.layout):
             d = {"head": [], "tabs": [{"name": "PAGE 1", "raw": "", "lines": []}]}
         else:
