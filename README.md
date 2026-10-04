@@ -15,6 +15,10 @@ Helm is a free, polyphonic synthesizer with:
 
 This port brings the full Helm synthesis engine directly into MPC OS as a native track instrument with custom touch screen UI and hardware Q-Link mapping.
 
+## screenshots
+<img width="1280" height="800" alt="image" src="https://github.com/user-attachments/assets/1743d001-89ab-4a8d-9606-e8a299f23eb4" />
+
+
 ## License
 
 GPL-3.0 (see `LICENSE`). Helm is copyright Matt Tytel.
