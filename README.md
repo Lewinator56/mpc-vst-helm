@@ -69,12 +69,29 @@ Install from the [MPC plugin catalog](https://sd88me.github.io/mpc-vst-plugins/)
 ## Setup prior to install
 SSH access is required, if you dont have it, the following steps can be used. This is easiest to do on WSL. 
 
+This method has been tested on an MPC key 37 **GEN1**, As it bypasses integrity checks for the firmware image by using the bootloader it may work for **GEN2** hardware. If you try this method on GEN2, the issue you may encounter is the fastboot OEM command not working if this has changed, If this has not, this should work exactly the same as GEN1.
+
 ### Prerequisites
 - [mpcimg](https://github.com/TheKikGen/MPC-LiveXplore/tree/master/imgmaker/bin)
-- usbipd-win `
+- usbipd-win powershell `winget install usbipd`
+- fastboot on WSL `sudo apt-get install fastboot`
 
-1. download the latest MPC firmware USB image
-2. Extract the rootfs from the image using the 
+1. download the latest MPC firmware USB image onto WSL
+2. Extract the rootfs from the image using mpcimg
+3. mount the rootfs `sudo mount rootfs /mnt/rootfs`
+4. cd to the mounted rootfs, and edit `/etc/ssh/sshd_config.d/10-az0x.conf` - set `PermitRootLogin Yes` and `PasswordAuthentication Yes`
+5. add a root password to the `/etc/shadow` file, you will need to generate this with openSSL.
+6. CD to the root of the mounted rootfs, set the SSH daemon to run at startup `ln -s usr/lib/systemd/system/sshd.service etc/systemd/system/multi-user.target.wants/`
+7. remoot the MPC into fastboot mode, there are a number of key combinations to do this, for the key 37 is is `pad bank C + full level + erase` while powering on, if you were successful you will see an undate mode screen.
+8. in windows, in a powershell terminal run `usbipd list`, note the BUSID of the MPC
+9. run `usbipd bind --busid <MPC BUSID>`
+10. run `usbipd attach --wsl --busid <MPC BUSID>` - assuming WSL is running this will bind it to WSL
+11. in WSL, cd to the director where you have the rootfs (NOT the mounted rootfs, but the raw rootfs you extracted, this has been modified by you, the mount opens it like a file so you can edit its contents.
+12. check that the MPC is detected and bound to WSL with usbipd correctly by running `sudo fastboot devices` - you should see one entry that says `android bootloader`
+13. run `sudo fastboot oem inmusic-unlock-magic-7de5fbc22b8c524e` - if this returns OK you have unlocked the bootloader.
+14. run `sudo fasttboot flash rootfs <rootfs-filename>` - this will take a few minutes, and should return OK when complete.
+15. run `sudo fastboot reboot` - this will reboot the MPC, and assuming everything was done correctly, you will have SSH access.
+16. Check SSH access from windows/linux with `ssh root@<MPC-IP-ADDR>`, and use the password you generated with openSSL.
 
 
 
