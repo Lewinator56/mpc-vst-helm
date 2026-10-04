@@ -93,14 +93,10 @@ This method has been tested on an MPC key 37 **GEN1**, As it bypasses integrity 
 15. run `sudo fastboot reboot` - this will reboot the MPC, and assuming everything was done correctly, you will have SSH access.
 16. Check SSH access from windows/linux with `ssh root@<MPC-IP-ADDR>`, and use the password you generated with openSSL.
 
+### Installing 
+WIth SSH setup, use the [MPC plugin catalog](https://sd88me.github.io/mpc-vst-plugins/).
 
-
-
-
-
-
-
-
+To install manually, download the release, extract it, and copy it into the `/storage/Synths` folder. You will need to register the plugin, however the MPC catalog installer will allow you to register new plugins.
 
 ## License
 
