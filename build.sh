@@ -6,6 +6,7 @@ cd "$SCRIPT_DIR"
 
 echo "=== 1. Generating parameters, skin, and XML descriptor ==="
 python3 tools/gen_vst.py vst.json
+python3 tools/helm_paint.py
 
 echo "=== 2. Cross-compiling ARM32 binary (helm.so) ==="
 mkdir -p build
@@ -38,13 +39,23 @@ ls -lh build/helm.so
 
 echo "=== 4. Packaging Release Bundle ==="
 PACKAGE_DIR="build/package/Matt Tytel - VST - Helm"
+rm -rf "$PACKAGE_DIR"
 mkdir -p "$PACKAGE_DIR"
 cp -r "build/skin/Matt Tytel - VST - Helm/"* "$PACKAGE_DIR/"
 cp build/helm.so "$PACKAGE_DIR/"
-cp -r "patches/Factory Presets" "$PACKAGE_DIR/patches"
+cp -r patches "$PACKAGE_DIR/"
 if [ -f build/pluginlist-entry.xml ]; then
   sed 's|file="[^"]*helm.so"|file="%payload-path%/Matt Tytel - VST - Helm/helm.so"|' build/pluginlist-entry.xml > "$PACKAGE_DIR/plugin-meta.xml"
 fi
 
+python3 ../../mpc-vst-plugins/tools/release.py \
+  --so build/helm.so \
+  --skin "build/skin/Matt Tytel - VST - Helm" \
+  --entry build/pluginlist-entry.xml \
+  --version "1.0.0" \
+  --extra "patches:patches" \
+  --about "Helm polyphonic synthesizer for Akai MPC" \
+  -o dist
+
 echo "=== BUILD COMPLETE ==="
-echo "Plugin packaged at: $PACKAGE_DIR"
+echo "Plugin packaged at: $PACKAGE_DIR and dist/Helm-1.0.0-mpc-armv7.zip"

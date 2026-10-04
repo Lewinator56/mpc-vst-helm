@@ -7,6 +7,10 @@
   "params": "params.json",
   "layout": "layout.conf",
   "art": "html",
+  "defines": {
+    "MODULE_SUBDIR": "\"patches\"",
+    "MODULE_DIR": "\"/sdcard/Synths/Matt Tytel - VST - Helm/patches\""
+  },
   "build": {
     "root": ".",
     "sources": [

@@ -116,6 +116,18 @@ static const int NUM_MOD_DESTS = sizeof(MOD_DESTS) / sizeof(MOD_DESTS[0]);
 
 static const int NUM_MOD_SLOTS = 8;
 
+static float get_dest_modulation_scale(int dest_idx) {
+    if (dest_idx <= 0 || dest_idx >= NUM_MOD_DESTS) return 1.0f;
+    const char* dst_name = MOD_DESTS[dest_idx];
+    if (!dst_name || !*dst_name) return 1.0f;
+    if (!mopo::Parameters::isParameter(dst_name)) return 1.0f;
+    const auto& d = mopo::Parameters::getDetails(dst_name);
+    if (d.min < 0.0f && d.max > 0.0f) {
+        return (float)d.max;
+    }
+    return (float)(d.max - d.min);
+}
+
 struct ModSlot {
     int source_idx = 0;
     int dest_idx = 0;
@@ -511,10 +523,13 @@ static void *helm_create(const char *data_dir) {
     // Look for factory patches in data_dir / relative paths
     std::vector<std::string> search_paths;
     if (data_dir && data_dir[0]) {
-        search_paths.push_back(std::string(data_dir) + "/patches");
-        search_paths.push_back(std::string(data_dir) + "/patches/Factory Presets");
         search_paths.push_back(std::string(data_dir));
+        search_paths.push_back(std::string(data_dir) + "/patches");
+        search_paths.push_back(std::string(data_dir) + "/Factory Presets");
+        search_paths.push_back(std::string(data_dir) + "/patches/Factory Presets");
     }
+    search_paths.push_back("/sdcard/Synths/Matt Tytel - VST - Helm/patches");
+    search_paths.push_back("/sdcard/Synths/Matt Tytel - VST - Helm/patches/Factory Presets");
     search_paths.push_back("./patches");
     search_paths.push_back("./patches/Factory Presets");
     search_paths.push_back("../patches");
@@ -567,8 +582,8 @@ static void helm_midi(void *inst_ptr, const uint8_t *msg, int len) {
         }
         case 0xB0: { // Control Change
             if (len >= 3) {
-                uint8_t cc = msg[1];
-                uint8_t val = msg[2];
+                uint8_t cc = msg[1] & 0x7F;
+                uint8_t val = msg[2] & 0x7F;
                 if (cc == 1) { // Mod Wheel
                     inst->engine.setModWheel((mopo::mopo_float)val / 127.0f, channel);
                 } else if (cc == 64) { // Sustain Pedal
@@ -582,8 +597,10 @@ static void helm_midi(void *inst_ptr, const uint8_t *msg, int len) {
         }
         case 0xE0: { // Pitch Bend
             if (len >= 3) {
-                int raw = ((int)msg[2] << 7) | (int)msg[1];
+                int raw = (((int)(msg[2] & 0x7F)) << 7) | (int)(msg[1] & 0x7F);
                 float bend = ((float)raw - 8192.0f) / 8192.0f;
+                if (bend < -1.0f) bend = -1.0f;
+                if (bend > 1.0f) bend = 1.0f;
                 inst->engine.setPitchWheel(bend, channel);
             }
             break;
@@ -648,12 +665,18 @@ static void helm_set_param(void *inst_ptr, const char *key, const char *val) {
                 inst->mod_slots[slot_idx].source_idx = atoi(val);
                 inst->update_slot(slot_idx);
             } else if (strcmp(field, "dest") == 0) {
+                int old_dest = inst->mod_slots[slot_idx].dest_idx;
+                float old_scale = get_dest_modulation_scale(old_dest);
+                float cur_pct = (old_scale > 1e-4f) ? (inst->mod_slots[slot_idx].amount / old_scale) : 0.0f;
                 inst->mod_slots[slot_idx].dest_idx = atoi(val);
+                float new_scale = get_dest_modulation_scale(inst->mod_slots[slot_idx].dest_idx);
+                inst->mod_slots[slot_idx].amount = cur_pct * new_scale;
                 inst->update_slot(slot_idx);
             } else if (strcmp(field, "amount") == 0) {
                 float val_f = (float)atof(val);
-                if (fabsf(val_f) > 1.0f) val_f /= 100.0f;
-                inst->mod_slots[slot_idx].amount = val_f;
+                float pct = val_f / 100.0f;
+                float scale = get_dest_modulation_scale(inst->mod_slots[slot_idx].dest_idx);
+                inst->mod_slots[slot_idx].amount = pct * scale;
                 inst->update_slot(slot_idx);
             }
             return;
@@ -777,7 +800,13 @@ static int helm_get_param(void *inst_ptr, const char *key, char *buf, int buf_le
                 snprintf(buf, buf_len, "%d", inst->mod_slots[slot_idx].dest_idx);
                 return 1;
             } else if (strcmp(field, "amount") == 0) {
-                int val_i = (int)lroundf(inst->mod_slots[slot_idx].amount * 100.0f);
+                float scale = get_dest_modulation_scale(inst->mod_slots[slot_idx].dest_idx);
+                int val_i = 0;
+                if (scale > 1e-4f) {
+                    val_i = (int)lroundf((inst->mod_slots[slot_idx].amount / scale) * 100.0f);
+                    if (val_i < -100) val_i = -100;
+                    if (val_i > 100) val_i = 100;
+                }
                 snprintf(buf, buf_len, "%d", val_i);
                 return 1;
             }

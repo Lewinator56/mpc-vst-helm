@@ -1,3 +1,6 @@
+/* skin studio: look */
+
+/* end skin studio */
 /* Helm MPC Skin Stylesheet (art_css=helm.css) */
 
 @font-face {
@@ -9,13 +12,13 @@
 :root {
   --font: "Open Sans", "Titillium Web", "DejaVu Sans", sans-serif;
   --title-font: "Open Sans", "Titillium Web", sans-serif;
-  --title-size: 14px;
-  --label-size: 12px;
+  --title-size: 20px;
+  --label-size: 20px;
   --seg-size: 12px;
-  --button-size: 14px;
-  --radius: 6px;
-  --sheen: 0.15;
-  --shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7));
+  --button-size: 20px;
+  --radius: 0px;
+  --sheen: 0.12;
+  --shadow: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.8));
 }
 
 text {
@@ -23,95 +26,105 @@ text {
   font-weight: 600;
 }
 
-/* Frames & Panels */
+/* Frames & Panels (Desktop Helm Charcoal) */
 .frame-border {
-  fill: rgba(18, 24, 30, 0.7);
-  stroke: var(--line);
+  fill: #1e2024;
+  stroke: #2b2e35;
   stroke-width: 1.5;
   rx: 6px;
 }
+
 .frame-title {
   font-family: var(--title-font);
   font-size: var(--title-size);
   font-weight: 700;
-  fill: var(--accent-hi);
+  fill: #20c8ff;
   letter-spacing: 0.08em;
 }
+
 .td3 .frame-border {
-  fill: var(--box);
-  stroke: var(--line);
+  fill: #1c1e22;
+  stroke: #2c3038;
   stroke-width: 1.5;
 }
+
 .td3 .frame-title {
-  fill: var(--accent);
+  fill: #20c8ff;
 }
 
 /* Free text and labels */
 .text {
   font-size: var(--label-size);
   letter-spacing: 0.05em;
-  fill: var(--ink);
+  fill: #e8ecf2;
 }
 
-/* Knobs */
+/* Knobs (Helm Gunmetal with Amber/Orange Modulated Indicator) */
 .knob-track {
   fill: none;
-  stroke: #182026;
+  stroke: #141618;
   stroke-width: 3.5;
   stroke-linecap: round;
 }
+
 .knob-arc {
   fill: none;
-  stroke: #38c5c5;
+  stroke: #ff9600;
   stroke-width: 3.5;
   stroke-linecap: round;
 }
+
 .knob-face {
-  fill: #14191e;
-  stroke: #222b33;
+  fill: #1a1c1f;
+  stroke: #262930;
   stroke-width: 1.5;
-  filter: var(--shadow);
 }
+
 .knob-pointer {
-  stroke: #50e4e4;
+  stroke: #ffaa22;
   stroke-width: 2.5;
   stroke-linecap: round;
 }
 
 /* Sliders */
 .slider-well {
-  fill: #080b0e;
-  stroke: #222b33;
+  fill: #131417;
+  stroke: #262932;
   stroke-width: 1.5;
   rx: 4px;
 }
+
 .slider-fill {
-  fill: #38c5c5;
+  fill: #20c8ff;
 }
+
 .slider-thumb {
-  fill: #161c22;
-  stroke: #50e4e4;
+  fill: #202328;
+  stroke: #20c8ff;
   stroke-width: 2.5;
   filter: var(--shadow);
 }
 
 /* Fader Look (.look-fader) */
 .look-slot {
-  fill: #06090c;
-  stroke: #202932;
+  fill: #101215;
+  stroke: #242830;
   stroke-width: 1.5;
 }
+
 .look-tick {
-  stroke: #28333e;
+  stroke: #2a303a;
   stroke-width: 1;
 }
+
 .look-fader {
-  fill: #1a222a;
-  stroke: #38c5c5;
+  fill: #181a1e;
+  stroke: #20c8ff;
   stroke-width: 1.5;
   filter: var(--shadow);
   rx: 3px;
 }
+
 .look-ridge {
   stroke: #50e4e4;
   stroke-width: 1.5;
@@ -123,12 +136,13 @@ text {
   stroke: #222b33;
   stroke-width: 1.5;
 }
+
 .pill-thumb {
   fill: #3a4550;
   stroke: #161c22;
   stroke-width: 1;
-  filter: var(--shadow);
 }
+
 .on .pill-thumb {
   fill: #38c5c5;
   stroke: #50e4e4;
@@ -141,20 +155,16 @@ text {
   fill: #161c22;
   stroke: #3a4550;
   stroke-width: 1.5;
-  filter: var(--shadow);
   rx: var(--radius);
 }
-.button-sheen {
-  stroke: rgba(255, 255, 255, 0.18);
-  stroke-width: 1;
-  rx: var(--radius);
-}
+
 .button-tx {
   font-size: var(--button-size);
   fill: #f0f4f8;
   letter-spacing: 0.08em;
   font-weight: 700;
 }
+
 .td3 .button-tx {
   fill: #ffffff;
 }
@@ -166,15 +176,18 @@ text {
   stroke-width: 1.5;
   rx: 5px;
 }
+
 .box-label {
   font-size: var(--label-size);
   fill: var(--ink-dim);
   letter-spacing: 0.08em;
   font-weight: 600;
 }
+
 .arrow {
   fill: #38c5c5;
 }
+
 .arrow-bg {
   fill: #161c22;
 }
@@ -184,6 +197,7 @@ text {
   fill: var(--fill);
   rx: 4px;
 }
+
 .seg-tx {
   font-size: var(--seg-size);
   fill: var(--ink);
@@ -198,9 +212,11 @@ text {
   stroke-width: 1.5;
   rx: 4px;
 }
+
 .dot-cell {
   fill: var(--display-cell);
 }
+
 .dot-arrow {
   fill: var(--accent-hi);
 }
@@ -212,6 +228,7 @@ text {
   stroke-width: 1.5;
   rx: 4px;
 }
+
 .tile-border {
   fill: none;
   stroke: #38c5c5;

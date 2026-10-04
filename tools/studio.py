@@ -528,7 +528,11 @@ def preview(skin_dir, out_pattern, frame=40):
                 elif sd["type"] == "Knob":
                     st = Image.open(os.path.join(skin_dir, sd["data"]["filmStrip"])).convert("RGBA")
                     fw = st.size[0]
-                    fr = st.crop((0, frame * fw, fw, (frame + 1) * fw))
+                    total_f = max(1, st.size[1] // fw)
+                    f_idx = min(total_f - 1, round((frame / float(shadow_skin.FRAMES - 1)) * (total_f - 1)))
+                    fr = st.crop((0, f_idx * fw, fw, (f_idx + 1) * fw))
+                    if fr.size != (sw, sh):
+                        fr = fr.resize((sw, sh), Image.LANCZOS)
                     im.paste(fr, (x + sx, y + sy), fr)
                 elif sd["type"] == "Button":
                     img = sd["data"]["offImage"]

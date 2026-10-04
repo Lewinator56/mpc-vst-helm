@@ -12,3 +12,7 @@ __pycache__/
 # OS files
 .DS_Store
 Thumbs.db
+*.bak
+
+# Distribution packages
+dist/
